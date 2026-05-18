@@ -31,7 +31,7 @@ O comportamento da banca não é estático; ele evolui. Para evitar contaminaç�
 
 ## 📉 3. O Gênesis do Algoritmo: Cohort Legacy (48Q)
 
-![Dashboard FATEC 48 Questões](gabarito_fatec_48q_master.jpg)
+![Dashboard FATEC 48 Questões](gabarito_fatec_48q_master.png)
 
 A análise da matriz histórica revela o comportamento primitivo da banca. O "Muro Simétrico" demonstrava uma forte intenção de equilibrar a prova, mas com um viés estatístico claro: as alternativas iniciais (A e B) frequentemente acumulavam desvios positivos (arredondamento para cima), enquanto a alternativa **E** sofria a maior penalização do período, atuando como descarte.
 
@@ -39,7 +39,7 @@ A análise da matriz histórica revela o comportamento primitivo da banca. O "Mu
 
 ## 📈 4. Dashboard Analítico: Cohort Standard (54Q)
 
-![Dashboard Executivo FATEC 54Q](gabarito_fatec_definitivo_recriado.jpg)
+![Dashboard Executivo FATEC 54Q](gabarito_fatec_definitivo_recriado.png)
 
 Na era de ouro da estabilidade (15 anos), a visualização acima utiliza *barplots* para contrapor o **Modelo de Gabarito Ideal** contra o **Raio-X de Evolução Empilhada**, permitindo a detecção imediata de *outliers* (pontos fora da curva) e a visualização do volume estrito de cada alternativa ao longo do tempo.
 
@@ -56,7 +56,7 @@ A análise exploratória (EDA) permitiu classificar o comportamento de cada alte
 
 ## 🚀 5. O Impacto da Transição: Cohort Expansion (60Q)
 
-![Comparativo Transição 60Q](gabarito_transicao_60q_premium.jpg)
+![Comparativo Transição 60Q](gabarito_transicao_60q_premium.png)
 
 Ao ganhar 6 questões extras a partir do semestre 2025.2, a banca não buscou um equilíbrio matemático perfeito de 12 questões por alternativa. A Análise de Divergência prova que as 6 novas alocações foram jogadas estrategicamente para os polos do exame. O miolo (B, C, D) estagnou, enquanto as Letras **A (+2.5)** e **E (+2.8)** explodiram em volume.
 
@@ -95,7 +95,7 @@ git clone [https://github.com/caiiobuenoo/fatec-analise-gabaritos.git](https://g
 cd fatec-analise-gabaritos
 
 # Instale as bibliotecas de Data Science requeridas
-pip install -r requirements.txt
+pip install pandas matplotlib seaborn numpy
 
-# Execute os scripts de visualização (Pipeline)
-python src/visualization/dashboard_fatec_matriz_54q.py
+# Execute os scripts de visualização (Exemplo)
+python analise_fatec_60q_master.py
