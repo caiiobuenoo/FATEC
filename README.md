@@ -9,7 +9,7 @@
 ![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)
 
 > **TL;DR (Executive Summary):**
-> * 🎯 **O Problema:** Identificar padrões ocultos (Assimetria Controlada) na distribuição de alternativas dos gabaritos da FATEC.
+> * 🎯 **O Problema:** Identificar padrões ocultos (Assimetria Controlada) na distribution de alternativas dos gabaritos da FATEC.
 > * 🛠️ **A Solução:** Análise estatística de variância e desvio padrão sobre 15 anos de dados (Data Wrangling & EDA).
 > * 📈 **O Resultado:** Descoberta empírica de *alternativas-âncora* (baixo risco) e *alternativas-gatilho* (alta volatilidade), permitindo otimizar a tomada de decisão sob pressão de tempo (Forecasting).
 
@@ -88,7 +88,7 @@ Considerando a reexecução hipotética de uma prova sob as regras de automaçã
 
 ## 📈 5. Dashboard Analítico: Cohort Standard (54Q)
 
-![Dashboard Executivo FATEC 54Q](output/gabarito_fatec_definitivo_recriado.png)
+![Dashboard Executivo FATEC 54Q](output/gabarito_fatec_definitivo.png)
 
 Na era de ouro da estabilidade (15 anos de dados consolidados), a visualização acima utiliza *barplots* para contrapor o **Modelo de Gabarito Ideal** contra o **Raio-X de Evolução Empilhada**, permitindo a detecção imediata de *outliers* na série temporal.
 
@@ -99,7 +99,7 @@ A Análise Exploratória de Dados (EDA) permitiu classificar o perfil de risco:
 * 🟠 **Letra B (O "Honeypot" Punitivo):** Sofreu um *Crash Point* algorítmico nas safras 2024.1 e 2024.2, caindo para apenas 5 respostas (circuit breaker punitivo da banca).
 * 🟢 **Letra C (A "Âncora Estatística"):** Atua como o centro de gravidade. Possui o menor Desvio Padrão global, ancorando-se na marca de **10 respostas** na esmagadora maioria da série histórica.
 * 🔴 **Letra D (O "Gatilho de Caos"):** O vetor primário de volatilidade. Registra picos anômalos de **15 a 17 ocorrências**.
-* 🟣 **Letra E (O "Pêndulo de Compensação"):** Absorve o saldo residual das equações de distribuição.
+* 🟣 **Letra E (O "Pêndulo de Compensação"):** Absorve o saldo residual das aquações de distribuição.
 
 ### 5.2. Cenários de Simulação Probabilística (Exame de 54Q)
 | Alternativa | Cenário 1 (Pico D) | Cenário 2 (Retorno do Honeypot) | Cenário 3 (Saturação E) | Modelo "Certeiro" (Target) |
@@ -137,7 +137,7 @@ A partir do semestre 2025.2, a carga do exame aumentou para 60 questões. A Aná
 
 ## 🔄 7. A Linha do Tempo da "Assimetria Controlada"
 
-![Evolução Cronológica FATEC](output/evolucao_cronologica_matrizes_fatec.png)
+![Evolução Cronológica FATEC](output/gabarito_fatec_definitivo.png)
 
 * **Matriz 48Q:** Simetria rudimentar, linear e vulnerável.
 * **Matriz 54Q:** Introdução do caos controlado. Uso de variâncias extremas (D) e âncoras (C) para ofuscar o padrão subjacente.
@@ -183,4 +183,4 @@ A taxonomia do repositório segue os padrões da comunidade de Ciência de Dados
 # ==========================================
 git clone [https://github.com/caiiobuenoo/FATEC.git](https://github.com/caiiobuenoo/FATEC.git)
 cd FATEC
-python src/visualization/analise_fatec_60q_master.py
+python src/visualization/dashboard_fatec_matriz_54q.py
