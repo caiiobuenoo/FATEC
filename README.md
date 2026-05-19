@@ -5,97 +5,182 @@
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-Low%20Level%20Rendering-brightgreen.svg)
 ![Seaborn](https://img.shields.io/badge/Seaborn-Statistical%20API-4C72B0.svg)
 ![Status](https://img.shields.io/badge/Status-Deployed-success.svg)
-![Data Science](https://img.shields.io/badge/Domain-Data%20Science%20%26%20Analytics-black.svg)
+![Domain](https://img.shields.io/badge/Domain-Data%20Science%20%26%20Analytics-black.svg)
+![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)
 
-## 📌 1. Executive Summary & Business Problem
-Testes padronizados de múltipla escolha não são avaliações puramente de conhecimento; eles são sistemas probabilísticos complexos. Para garantir a integridade do exame e mitigar a taxa de sucesso de técnicas baseadas em probabilidade cega (o "chute" estatístico), bancas examinadoras desenvolvem algoritmos proprietários de distribuição de alternativas.
+> **TL;DR (Executive Summary):**
+> * 🎯 **O Problema:** Identificar padrões ocultos (Assimetria Controlada) na distribuição de alternativas dos gabaritos da FATEC.
+> * 🛠️ **A Solução:** Análise estatística de variância e desvio padrão sobre 15 anos de dados (Data Wrangling & EDA).
+> * 📈 **O Resultado:** Descoberta empírica de *alternativas-âncora* (baixo risco) e *alternativas-gatilho* (alta volatilidade), permitindo otimizar a tomada de decisão sob pressão de tempo (Forecasting).
 
-Este projeto aplica técnicas de **Data Analytics, Engenharia Reversa e Estatística Descritiva** sobre o histórico do Vestibular da FATEC (Faculdade de Tecnologia de São Paulo). O objetivo primário é auditar a matriz de respostas da banca, identificar os vieses de "Assimetria Controlada" inseridos intencionalmente no sistema e desenvolver uma heurística preditiva para otimização de tomada de decisão em cenários de tempo esgotado.
+## 🛠️ Stack Tecnológico
+**Linguagens & Bibliotecas:** Python, Pandas, NumPy, Matplotlib, Seaborn.
+**Ambiente & Deploy:** Jupyter Notebook, Google Colab, VS Code, Git/GitHub.
+**Conceitos Aplicados:** Data Analytics, Engenharia Reversa, Estatística Descritiva, Teoria dos Jogos.
+
+---
+
+## 📑 Índice
+1. [Resumo Executivo e Problema de Negócio](#1-resumo-executivo-e-problema-de-negócio)
+2. [Arquitetura de Dados e Pipeline ETL](#2-arquitetura-de-dados-e-pipeline-etl)
+3. [Modelagem Estatística e Framework Matemático](#3-modelagem-estatística-e-framework-matemático)
+4. [O Gênesis do Algoritmo: Cohort Legacy (48Q)](#4-o-gênesis-do-algoritmo-cohort-legacy-48q)
+5. [Dashboard Analítico: Cohort Standard (54Q)](#5-dashboard-analítico-cohort-standard-54q)
+6. [O Impacto da Transição: Cohort Expansion (60Q)](#6-o-impacto-da-transição-cohort-expansion-60q)
+7. [A Linha do Tempo da Assimetria Controlada](#7-a-linha-do-tempo-da-assimetria-controlada)
+8. [Forecasting e Otimização de Risco](#8-forecasting-e-otimização-de-risco)
+9. [Estrutura do Projeto e Reprodutibilidade](#9-estrutura-do-projeto-e-reprodutibilidade)
+10. [Roadmap e Próximos Passos](#10-roadmap-e-próximos-passos)
+
+---
+
+## 📌 1. Resumo Executivo e Problema de Negócio
+Testes padronizados de múltipla escolha não são avaliações puramente de conhecimento; eles são sistemas probabilísticos complexos estruturados para medir proficiência sob pressão. Para garantir a integridade do exame e mitigar o ROI (Return on Investment) de técnicas baseadas em probabilidade cega (o "chute" estatístico), bancas examinadoras desenvolvem algoritmos proprietários de distribuição de alternativas.
+
+Este projeto aplica técnicas de **Data Analytics, Engenharia Reversa e Estatística Descritiva** sobre o histórico longitudinal (2007 - 2026) do Vestibular da FATEC (Faculdade de Tecnologia de São Paulo). O objetivo primário é auditar a matriz de respostas da banca, identificar os vieses de "Assimetria Controlada" inseridos intencionalmente no sistema e desenvolver uma heurística preditiva para otimização de tomada de decisão.
 
 ---
 
 ## 🏗️ 2. Arquitetura de Dados e Pipeline ETL
-Para garantir a confiabilidade matemática da análise, os dados brutos passaram por um pipeline rigoroso de *Extract, Transform, Load* (ETL):
+Para garantir a confiabilidade matemática da análise, os dados brutos passaram por um pipeline rigoroso de *Extract, Transform, Load* (ETL), focado em governança e qualidade de dados:
 
-* **Data Extraction:** Coleta manual/automatizada de espelhos de gabaritos oficiais das edições históricas.
-* **Data Wrangling & Transformation:** Normalização de dados não-estruturados em um esquema relacional (DataFrames estruturados no formato Tidy Data).
-* **Data Validation (Integrity Checks):** Criação de testes de sanidade garantindo que a soma das alternativas (A, B, C, D, E) seja estritamente igual ao Total de Questões para cada registro, eliminando ruídos ou falhas de transcrição.
-
-### 2.1. Cohort Segmentation (Agrupamento Temporal)
-O comportamento da banca não é estático; ele evolui. Para evitar contaminação estatística, o *dataset* foi isolado em três *cohorts* de formato de prova:
-1. **Cohort Legacy (48 Questões | 2007.2 - 2009.2):** A fase embrionária do exame.
-2. **Cohort Standard (54 Questões | 2010.1 - 2025.1):** A "Moda Estatística" e o *core* das nossas análises de variância (15 anos de estabilidade).
-3. **Cohort Expansion (60 Questões | 2025.2 - Atual):** A nova matriz curricular e comportamental da banca.
+* **Data Ingestion:** Extração orientada a lotes (batch processing) de espelhos de gabaritos oficiais das edições históricas da instituição.
+* **Data Cleansing & Wrangling:** Normalização de dados não-estruturados em um esquema relacional (Tidy Data). O Dicionário de Dados consolidado encontra-se na pasta `/data`.
+* **Feature Engineering:** Criação da dimensão categórica `Cohort` para segmentar os dados e evitar poluição estatística entre diferentes matrizes curriculares.
+* **Integrity Checks:** Validação estrita garantindo que a soma das frequências absolutas seja perfeitamente igual ao Total de Questões do período investigado.
 
 ---
 
-## 📉 3. O Gênesis do Algoritmo: Cohort Legacy (48Q)
+## 📐 3. Modelagem Estatística e Framework Matemático
+Em um cenário de incerteza absoluta, a esperança matemática $E(X)$ de acertos em $n$ questões restantes com 5 alternativas é ditada por um modelo binomial clássico, onde a probabilidade natural é $p = 0.20$.
 
-![Dashboard FATEC 48 Questões](gabarito_fatec_48q_master.png)
+$E(X) = n \cdot p$
 
-A análise da matriz histórica revela o comportamento primitivo da banca. O "Muro Simétrico" demonstrava uma forte intenção de equilibrar a prova, mas com um viés estatístico claro: as alternativas iniciais (A e B) frequentemente acumulavam desvios positivos (arredondamento para cima), enquanto a alternativa **E** sofria a maior penalização do período, atuando como descarte.
+O objetivo da "Assimetria Controlada" da banca é manipular a variância $\sigma^2$ do exame para punir o chute ingênuo. O modelo de *scoring* deste projeto busca identificar alternativas com desvios positivos históricos consistentes, alterando o peso probabilístico para $p > 0.20$ e maximizando o Valor Esperado do candidato:
 
----
+$\sigma^2 = \frac{\sum_{i=1}^{N} (x_i - \mu)^2}{N}$
 
-## 📈 4. Dashboard Analítico: Cohort Standard (54Q)
-
-![Dashboard Executivo FATEC 54Q](gabarito_fatec_definitivo_recriado.png)
-
-Na era de ouro da estabilidade (15 anos), a visualização acima utiliza *barplots* para contrapor o **Modelo de Gabarito Ideal** contra o **Raio-X de Evolução Empilhada**, permitindo a detecção imediata de *outliers* (pontos fora da curva) e a visualização do volume estrito de cada alternativa ao longo do tempo.
-
-### 4.1. Deep Dive: A Psicologia do Algoritmo (54Q)
-A análise exploratória (EDA) permitiu classificar o comportamento de cada alternativa sob a ótica de desvio padrão e risco:
-
-* 🟢 **Letra C (A "Âncora Estatística"):** Atua como o centro de gravidade do modelo e prova de sanidade do exame. Possui o menor Desvio Padrão do conjunto, ancorando-se na marca de **10 respostas corretas** na grande maioria da série histórica.
-* 🔵 **Letra A (A "Baseline Silenciosa"):** Historicamente discreta, funciona como um preenchimento seguro e de baixa variância (oscilando entre 9 e 11 respostas).
-* 🟠 **Letra B (O "Honeypot" Punitivo):** Durante anos operou com alto volume (11 a 12 pontos). Contudo, a análise de série temporal detectou um *Crash Point* algorítmico nas safras 2024.1 e 2024.2, onde a banca cortou sua presença para **apenas 5 respostas**. Conclusão: a banca programa quebras abruptas para punir "chutes" padronizados em opções seguras.
-* 🔴 **Letra D (O "Gatilho de Caos"):** É o vetor de volatilidade intencional. Quando a banca projeta um exame para maximizar a dificuldade probabilística, despeja um volume massivo de gabaritos na letra D, registrando picos anômalos de **15 a 17 ocorrências**.
-* 🟣 **Letra E (O "Pêndulo de Compensação"):** Funciona como a variável dependente do sistema, absorvendo o "troco" das outras alternativas. Gera uma distribuição binária: escassez absoluta (7 a 8) ou inundação do cartão (até 14 respostas).
+Através da análise da variância (dispersão em relação à média ideal $\mu$), isolamos o comportamento previsível de cada letra.
 
 ---
 
-## 🚀 5. O Impacto da Transição: Cohort Expansion (60Q)
+## 📉 4. O Gênesis do Algoritmo: Cohort Legacy (48Q)
 
-![Comparativo Transição 60Q](gabarito_transicao_60q_premium.png)
+![Dashboard FATEC 48 Questões](output/gabarito_fatec_48q_master.png)
 
-Ao ganhar 6 questões extras a partir do semestre 2025.2, a banca não buscou um equilíbrio matemático perfeito de 12 questões por alternativa. A Análise de Divergência prova que as 6 novas alocações foram jogadas estrategicamente para os polos do exame. O miolo (B, C, D) estagnou, enquanto as Letras **A (+2.5)** e **E (+2.8)** explodiram em volume.
+A fase embrionária (2007.2 - 2009.2) revela o comportamento primitivo da banca. O "Muro Simétrico" demonstrava uma forte intenção de equilibrar a prova organicamente, mas com um viés estatístico de execução claro: as alternativas iniciais (A e B) frequentemente acumulavam desvios positivos por regras de arredondamento humano, enquanto a alternativa **E** absorvia o desvio negativo máximo, atuando como zona de descarte.
 
----
+### 4.2. Cenários de Simulação Probabilística (Exame de 48Q)
+Considerando a reexecução hipotética de uma prova sob as regras de automação desta cohort:
 
-## 🔄 6. A Linha do Tempo da "Assimetria Controlada"
+| Alternativa | Cenário 1 (Alta Variância) | Cenário 2 (Desvio Lateral) | Cenário 3 (Achatamento E) | Modelo "Certeiro" (Target) |
+| :---: | :---: | :---: | :---: | :---: |
+| **A** | 11 | 10 | 11 | **10** |
+| **B** | 11 | 12 | 12 | **10** |
+| **C** | 9 | 10 | 9 | **10** |
+| **D** | 9 | 8 | 8 | **9** |
+| **E** | 8 | 8 | 8 | **9** |
+| **Total** | **48** | **48** | **48** | **48** |
 
-![Evolução Cronológica FATEC](evolucao_cronologica_matrizes_fatec.png)
-
-Este painel consolida as três eras da FATEC, comprovando de forma visual a evolução algorítmica:
-* **Matriz 48Q:** Simetria rudimentar e previsível.
-* **Matriz 54Q:** Introdução de variâncias agressivas (D) e âncoras (C) para quebrar o padrão.
-* **Nova Matriz 60Q:** Congelamento do "miolo" em exatas 11 ocorrências por letra e alocação do peso estatístico nas extremidades do gabarito (A e E), selando o padrão de **Assimetria Controlada**.
-
----
-
-## 🔮 7. Forecasting: Cenários Preditivos para Otimização de Risco
-Transformando dados em inteligência de decisão. Frente ao cenário restrito do vestibular, o *risk management* em chutes deve considerar a realidade atual (Nova Matriz 60Q):
-
-1. **A Nova Fronteira de Segurança (Polos A e E):** Com a nova estruturação, as alternativas A (13) e E (14) assumiram o topo da cadeia probabilística. Juntas representam quase 45% do gabarito. Se houver deficiência de marcações nessas letras no final da prova, elas são estatisticamente os melhores alvos.
-2. **O Miolo Restrito (B, C, D):** O limite dessas alternativas foi tencionado para um teto estrito de 11 questões. Ultrapassar marcações conscientes de 13 ou 14 letras C ou D na prova atual indica uma altíssima probabilidade de que o candidato caiu em armadilhas (distratores) da banca examinadora.
+* **Critério do Target:** O modelo ideal estabiliza no vetor $[10, 10, 10, 9, 9]$ devido à incapacidade estrutural do algoritmo primitivo em sustentar picos de volatilidade sem comprometer a restrição de simetria básica do período.
 
 ---
 
-## 💻 8. Reproducibilidade & Estrutura do Projeto
+## 📈 5. Dashboard Analítico: Cohort Standard (54Q)
 
-### Pré-requisitos (Ambiente de Desenvolvimento)
-* Python 3.8+
-* Gestão de dependências via `pip` ou ambiente virtual (`venv` / `conda`).
+![Dashboard Executivo FATEC 54Q](output/gabarito_fatec_definitivo_recriado.png)
+
+Na era de ouro da estabilidade (15 anos de dados consolidados), a visualização acima utiliza *barplots* para contrapor o **Modelo de Gabarito Ideal** contra o **Raio-X de Evolução Empilhada**, permitindo a detecção imediata de *outliers* na série temporal.
+
+### 5.1. Deep Dive: A Psicologia do Algoritmo (54Q)
+A Análise Exploratória de Dados (EDA) permitiu classificar o perfil de risco:
+
+* 🔵 **Letra A (A "Baseline Silenciosa"):** Historicamente discreta, funciona como um preenchimento seguro e de baixa variância (canal entre 9 e 11).
+* 🟠 **Letra B (O "Honeypot" Punitivo):** Sofreu um *Crash Point* algorítmico nas safras 2024.1 e 2024.2, caindo para apenas 5 respostas (circuit breaker punitivo da banca).
+* 🟢 **Letra C (A "Âncora Estatística"):** Atua como o centro de gravidade. Possui o menor Desvio Padrão global, ancorando-se na marca de **10 respostas** na esmagadora maioria da série histórica.
+* 🔴 **Letra D (O "Gatilho de Caos"):** O vetor primário de volatilidade. Registra picos anômalos de **15 a 17 ocorrências**.
+* 🟣 **Letra E (O "Pêndulo de Compensação"):** Absorve o saldo residual das equações de distribuição.
+
+### 5.2. Cenários de Simulação Probabilística (Exame de 54Q)
+| Alternativa | Cenário 1 (Pico D) | Cenário 2 (Retorno do Honeypot) | Cenário 3 (Saturação E) | Modelo "Certeiro" (Target) |
+| :---: | :---: | :---: | :---: | :---: |
+| **A** | 10 | 11 | 9 | **11** |
+| **B** | 9 | 13 | 11 | **12** |
+| **C** | 10 | 10 | 10 | **10** |
+| **D** | 16 | 11 | 10 | **12** |
+| **E** | 9 | 9 | 14 | **9** |
+| **Total** | **54** | **54** | **54** | **54** |
+
+* **Critério do Target:** Representa o *Steady State* (Estado Estacionário). A Letra C atua como restrição rígida em 10. As variáveis de ataque (B e D) operam em equilíbrio na fronteira máxima (12), forçando a Letra E a atuar como folga sistêmica na base inferior (9).
+
+---
+
+## 🚀 6. O Impacto da Transição: Cohort Expansion (60Q)
+
+![Comparativo Transição 60Q](output/gabarito_transicao_60q_premium.png)
+
+A partir do semestre 2025.2, a carga do exame aumentou para 60 questões. A Análise de Divergência comprova que a banca rejeitou o modelo igualitário (12 precisas por letra). As 6 novas alocações foram injetadas estrategicamente nos polos. O miolo conteve sua expansão, enquanto as Letras **A (+2.5)** e **E (+2.8)** explodiram em dominância.
+
+### 6.2. Cenários de Simulação Probabilística (Exame de 60Q)
+| Alternativa | Cenário 1 (Polarização) | Cenário 2 (Instabilidade Central) | Cenário 3 (Hiper-Volume A) | Modelo "Certeiro" (Target) |
+| :---: | :---: | :---: | :---: | :---: |
+| **A** | 14 | 13 | 15 | **13** |
+| **B** | 11 | 12 | 11 | **11** |
+| **C** | 11 | 10 | 11 | **11** |
+| **D** | 10 | 11 | 11 | **11** |
+| **E** | 14 | 14 | 12 | **14** |
+| **Total** | **60** | **60** | **60** | **60** |
+
+* **Critério do Target:** Determinado pela nova política de *Achatamento de Miolo por Proteção Algorítmica*. Congelar as alternativas $[B, C, D]$ em 11 ocorrências obriga os polos $[A, E]$ a operar em regime de saturação simétrica desbalanceada (13 e 14).
+
+---
+
+## 🔄 7. A Linha do Tempo da "Assimetria Controlada"
+
+![Evolução Cronológica FATEC](output/evolucao_cronologica_matrizes_fatec.png)
+
+* **Matriz 48Q:** Simetria rudimentar, linear e vulnerável.
+* **Matriz 54Q:** Introdução do caos controlado. Uso de variâncias extremas (D) e âncoras (C) para ofuscar o padrão subjacente.
+* **Nova Matriz 60Q:** Modelo algorítmico definitivo. Congelamento exato do "miolo" e alocação maciça de peso nas margens (A e E).
+
+---
+
+## 🔮 8. Forecasting e Otimização de Risco
+Transformando *Data Analysis* em *Actionable Insights*:
+
+1. **A Nova Fronteira de Segurança (Polos A e E):** No cenário atual (60Q), as alternativas A (13) e E (14) concentram 45% do gabarito. Compõem o portfólio de chute estatístico com o maior Índice de Sharpe (Retorno sobre Risco).
+2. **Restrição de Miolo (Limites B, C, D):** O algoritmo fixa um teto rígido em 11 ocorrências para o centro. Marcações excessivas (ex: 13+ opções na letra C) são um Sinal de Alerta de captura por distratores linguísticos.
+
+---
+
+## 📂 9. Estrutura do Projeto e Reprodutibilidade
+
+### ☁️ Validação Estatística (Ambiente Cloud)
+Você pode auditar a matemática e os desvios padrões deste projeto diretamente no seu navegador, sem instalar nada:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/caiiobuenoo/FATEC/blob/main/notebooks/01_eda_fatec.ipynb)
+
+### 💻 Setup de Ambiente (Local)
+A taxonomia do repositório segue os padrões da comunidade de Ciência de Dados.
 
 ```bash
-# Clone o repositório
-git clone [https://github.com/caiiobuenoo/fatec-analise-gabaritos.git](https://github.com/caiiobuenoo/fatec-analise-gabaritos.git)
+# ==========================================
+# 1. VISÃO GERAL DO REPOSITÓRIO
+# ==========================================
+# FATEC/
+# ├── data/
+# │   ├── processed/          # DataFrames consolidados em CSV (Tidy Data)
+# │   └── DATA_DICTIONARY.md  # Governança e metadados
+# ├── notebooks/              # Jupyter Notebooks de EDA e Validação
+# ├── output/                 # Renderizações de painéis em alta resolução
+# ├── src/
+# │   └── visualization/      # Scripts focados na geração via Seaborn/Matplotlib
+# ├── LICENSE                 # Licença MIT
+# └── README.md               # Documentação principal
 
-# Acesse o diretório
-cd fatec-analise-gabaritos
-
-# Instale as bibliotecas de Data Science requeridas
-pip install pandas matplotlib seaborn numpy
-
-# Execute os scripts de visualização (Exemplo)
-python analise_fatec_60q_master.py
+# ==========================================
+# 2. EXECUÇÃO
+# ==========================================
+git clone [https://github.com/caiiobuenoo/FATEC.git](https://github.com/caiiobuenoo/FATEC.git)
+cd FATEC
+python src/visualization/analise_fatec_60q_master.py
