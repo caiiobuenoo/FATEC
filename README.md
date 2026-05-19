@@ -66,7 +66,7 @@ Através da análise da variância (dispersão em relação à média ideal $\mu
 
 ## 📉 4. O Gênesis do Algoritmo: Cohort Legacy (48Q)
 
-![Dashboard FATEC 48 Questões](https://raw.githubusercontent.com/caiiobuenoo/FATEC/main/output/gabarito_fatec_48q.PNG)
+![Dashboard FATEC 48 Questões](./output/gabarito_fatec_48q_master.png)
 
 A fase embrionária (2007.2 - 2009.2) revela o comportamento primitivo da banca. O "Muro Simétrico" demonstrava uma forte intenção de equilibrar a prova organicamente, mas com um viés estatístico de execução claro: as alternativas iniciais (A e B) frequentemente acumulavam desvios positivos por regras de arredondamento humano, enquanto a alternativa **E** absorvia o desvio negativo máximo, atuando como zona de descarte.
 
@@ -88,7 +88,7 @@ Considerando a reexecução hipotética de uma prova sob as regras de automaçã
 
 ## 📈 5. Dashboard Analítico: Cohort Standard (54Q)
 
-![Dashboard Executivo FATEC 54Q](https://raw.githubusercontent.com/caiiobuenoo/FATEC/main/output/gabarito_fatec_54q.PNG)
+![Dashboard Executivo FATEC 54Q](./output/gabarito_fatec_definitivo_recriado.png)
 
 Na era de ouro da estabilidade (15 anos de dados consolidados), a visualização acima utiliza *barplots* para contrapor o **Modelo de Gabarito Ideal** contra o **Raio-X de Evolução Empilhada**, permitindo a detecção imediata de *outliers* na série temporal.
 
@@ -117,7 +117,7 @@ A Análise Exploratória de Dados (EDA) permitiu classificar o perfil de risco:
 
 ## 🚀 6. O Impacto da Transição: Cohort Expansion (60Q)
 
-![Comparativo Transição 60Q](https://raw.githubusercontent.com/caiiobuenoo/FATEC/main/output/gabarito_fatec_60q.PNG)
+![Comparativo Transição 60Q](./output/gabarito_transicao_60q_premium.png)
 
 A partir do semestre 2025.2, a carga do exame aumentou para 60 questões. A Análise de Divergência comprova que a banca rejeitou o modelo igualitário (12 precisas por letra). As 6 novas alocações foram injetadas estrategicamente nos polos. O miolo conteve sua expansão, enquanto as Letras **A (+2.5)** e **E (+2.8)** explodiram em dominância.
 
@@ -137,7 +137,7 @@ A partir do semestre 2025.2, a carga do exame aumentou para 60 questões. A Aná
 
 ## 🔄 7. A Linha do Tempo da "Assimetria Controlada"
 
-![Evolução Cronológica FATEC](https://raw.githubusercontent.com/caiiobuenoo/FATEC/main/output/gabarito_fatec_evolucao_matrizes.PNG)
+![Evolução Cronológica FATEC](./output/evolucao_cronologica_matrizes_fatec.png.)
 
 * **Matriz 48Q:** Simetria rudimentar, linear e vulnerável.
 * **Matriz 54Q:** Introdução do caos controlado. Uso de variâncias extremas (D) e âncoras (C) para ofuscar o padrão subjacente.
