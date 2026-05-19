@@ -28,9 +28,11 @@
 5. [Dashboard Analítico: Cohort Standard (54Q)](#5-dashboard-analítico-cohort-standard-54q)
 6. [O Impacto da Transição: Cohort Expansion (60Q)](#6-o-impacto-da-transição-cohort-expansion-60q)
 7. [A Linha do Tempo da Assimetria Controlada](#7-a-linha-do-tempo-da-assimetria-controlada)
-8. [Forecasting e Otimização de Risco](#8-forecasting-e-otimização-de-risco)
-9. [Estrutura do Projeto e Reprodutibilidade](#9-estrutura-do-projeto-e-reprodutibilidade)
-10. [Roadmap e Próximos Passos](#10-roadmap-e-próximos-passos)
+8. [🧠 7.1. Resultados Chave & Key Insights (Maturidade Analítica)](#71-resultados-chave--key-insights-maturidade-analítica)
+9. [🔮 8. Forecasting e Otimização de Risco](#-8-forecasting-e-otimização-de-risco)
+10. [📂 9. Estrutura do Projeto e Reprodutibilidade](#-9-estrutura-do-projeto-e-reprodutibilidade)
+11. [🎯 10. Roadmap e Próximos Passos](#-10-roadmap-e-próximos-passos)
+12. [🤝 11. Como Contribuir (Open-Source Framework)](#-11-como-contribuir-open-source-framework)
 
 ---
 
@@ -111,7 +113,7 @@ A Análise Exploratória de Dados (EDA) permitiu classificar o perfil de risco:
 | **E** | 9 | 9 | 14 | **9** |
 | **Total** | **54** | **54** | **54** | **54** |
 
-* **Critério do Target:** Representa o *Steady State* (Estado Estacionário). A Letra C atua como restrição rígida em 10. As variáveis de ataque (B e D) operam em equilíbrio na fronteira máxima (12), forçando a Letra E a atuar como folga sistêmica na base inferior (9).
+* **Critério do Target:** Representa o *Steady State* (Estado Estacionário). A Letra C atua as restrições rígidas em 10. As variáveis de ataque (B e D) operam em equilíbrio na fronteira máxima (12), forçando a Letra E a atuar como folga sistêmica na base inferior (9).
 
 ---
 
@@ -137,11 +139,33 @@ A partir do semestre 2025.2, a carga do exame aumentou para 60 questões. A Aná
 
 ## 🔄 7. A Linha do Tempo da "Assimetria Controlada"
 
+O comportamento algorítmico da banca examinadora não foi estático ao longo das últimas duas décadas. A análise longitudinal permitiu mapear uma evolução clara na sofisticação das barreiras probabilísticas inseridas nos exames, dividida em três eras matemáticas distintas:
+
+| Matriz Curricular (Cohort) | Horizonte Temporal | Volume de Questões | Padrão Comportamental Dominante | Índice de Volatilidade ($\sigma$) | Restrição Rígida de Sistema |
+| :---: | :---: | :---: | :--- | :---: | :--- |
+| **Legacy (48Q)** | 2007.2 - 2009.2 | 48 Questões | Simetria Linear Primitiva | **Baixo** ($\sigma \approx 1.2$) | Tentativa de equilíbrio orgânico perfeito. Polos absorvem erros manuais de arredondamento. |
+| **Standard (54Q)** | 2010.1 - 2025.1 | 54 Questões | Caos Controlado Bimodal (Pico D) | **Médio-Alto** ($\sigma \approx 2.4$) | Quebra da aleatoriedade natural através de âncoras estáticas (C) e honeypots punitivos (B). |
+| **Expansion (60Q)** | 2025.2 - Atual | 60 Questões | Polarização Marginal de Extremos | **Alto** ($\sigma \approx 3.1$) | Achatamento do miolo da distribuição por segurança. Alocação massiva de volume nas margens (A e E). |
+
 ![Evolução Cronológica FATEC](./output/evolucao_cronologica_matrizes_fatec.png.)
 
-* **Matriz 48Q:** Simetria rudimentar, linear e vulnerável.
-* **Matriz 54Q:** Introdução do caos controlado. Uso de variâncias extremas (D) e âncoras (C) para ofuscar o padrão subjacente.
-* **Nova Matriz 60Q:** Modelo algorítmico definitivo. Congelamento exato do "miolo" e alocação maciça de peso nas margens (A e E).
+---
+
+## 🧠 7.1. Resultados Chave & Key Insights (Maturidade Analítica)
+
+Abaixo estão isolados os achados estocásticos mais críticos extraídos das simulações estatísticas do projeto, servindo como bússola preditiva para tomadas de decisão sob condições de incerteza:
+
+> 🎯 **Estabilidade Estocástica da Letra C (A Âncora do Sistema)**
+> A alternative **C** funcionou como o centro de gravidade absoluto durante a Cohort Standard (54Q). Com o menor desvio padrão global registrado na série temporal, ela manteve-se cravada na marca de exatamente **10 respostas corretas** em mais de 85% das edições analisadas. Isso prova que a Letra C não segue um *Random Walk* (passeio aleatório), mas sim uma restrição rígida de código do formulador.
+
+> ⚠️ **O Crash Point Bimodal da Letra B (O Mecanismo Honeypot)**
+> A alternativa **B** apresentou um comportamento bimodal perigoso. Embora sustente médias aceitáveis a longo prazo, ela sofreu um travamento de circuito (*circuit breaker*) punitivo nas safras recentes, despencando para apenas **5 ocorrências**. Esse comportamento indica que a Letra B atua como uma armadilha de saturação (Honeypot) para capturar candidatos que abusam de padrões ingênuos de preenchimento.
+
+> 🌋 **Letra D como Vetor Primário de Caos Injetado**
+> Diferente das âncoras silenciosas, a alternativa **D** é o braço armado da volatilidade da banca. Registrando desvios padrões elevados e picos anômalos de **15 a 17 ocorrências num único exame**, ela é utilizada artificialmente pelo algoritmo para gerar assimetria severa à direita, desestabilizando modelos preditivos baseados puramente em médias aritméticas simples.
+
+> 🛡️ **A Nova Fronteira de Saturação Simétrica (Polos A e E)**
+> Com a expansão para a Cohort de 60 Questões, a banca rejeitou a distribuição uniforme teórica (12 questões por letra). A Engenharia Reversa comprovou um congelamento de segurança do miolo (B, C, D fixados próximos a 11) para injetar as 6 novas questões diretamente nas extremidades, elevando as alternativas **A (13)** e **E (14)** ao posto de zonas de maior densidade probabilística do exame atual (portfólio de menor risco).
 
 ---
 
@@ -160,27 +184,17 @@ Você pode auditar a matemática e os desvios padrões deste projeto diretamente
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/caiiobuenoo/FATEC/blob/main/notebooks/01_eda_fatec.ipynb)
 
-### 💻 Setup de Ambiente (Local)
-A taxonomia do repositório segue os padrões da comunidade de Ciência de Dados.
+### 💻 Taxonomia do Repositório
+A árvore do projeto segue rigorosamente os padrões de governança da comunidade de Ciência de Dados.
 
-```bash
-# ==========================================
-# 1. VISÃO GERAL DO REPOSITÓRIO
-# ==========================================
-# FATEC/
-# ├── data/
-# │   ├── processed/          # DataFrames consolidados em CSV (Tidy Data)
-# │   └── DATA_DICTIONARY.md  # Governança e metadados
-# ├── notebooks/              # Jupyter Notebooks de EDA e Validação
-# ├── output/                 # Renderizações de painéis em alta resolução
-# ├── src/
-# │   └── visualization/      # Scripts focados na geração via Seaborn/Matplotlib
-# ├── LICENSE                 # Licença MIT
-# └── README.md               # Documentação principal
-
-# ==========================================
-# 2. EXECUÇÃO
-# ==========================================
-git clone [https://github.com/caiiobuenoo/FATEC.git](https://github.com/caiiobuenoo/FATEC.git)
-cd FATEC
-python src/visualization/dashboard_fatec_matriz_54q.py
+```text
+FATEC/
+├── data/
+│   ├── processed/          # DataFrames consolidados em CSV (Tidy Data)
+│   └── DATA_DICTIONARY.md  # Governança, metadados e restrições de nulidade
+├── notebooks/              # Jupyter Notebooks para EDA e Validação Estatística
+├── output/                 # Renderizações de painéis em alta resolução (.PNG)
+├── src/
+│   └── visualization/      # Scripts modulares focados na geração via Seaborn/Matplotlib
+├── LICENSE                 # Licença MIT (Open-Source)
+└── README.md               # Documentação técnica principal
