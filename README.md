@@ -30,7 +30,6 @@
 7. [A Linha do Tempo da Assimetria Controlada](#7-a-linha-do-tempo-da-assimetria-controlada)
 8. [Forecasting e Otimização de Risco](#8-forecasting-e-otimização-de-risco)
 9. [Estrutura do Projeto e Reprodutibilidade](#9-estrutura-do-projeto-e-reprodutibilidade)
-10. [Roadmap e Próximos Passos](#10-roadmap-e-próximos-passos)
 
 ---
 
