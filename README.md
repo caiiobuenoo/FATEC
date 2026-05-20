@@ -206,6 +206,7 @@ FATEC/
 │   └── visualization/      # Scripts modulares focados na geração via Seaborn/Matplotlib
 ├── LICENSE                 # Licença MIT (Open-Source)
 └── README.md               # Documentação técnica principal
+```
 
 ## 🤝 10. Como Contribuir (Open-Source Framework)
 
