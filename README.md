@@ -56,7 +56,7 @@ Para garantir a confiabilidade matemática da análise, os dados brutos passaram
 
 Para garantir a transparência metodológica e a auditabilidade deste projeto, é importante destacar que a série histórica não possui gabaritos binários (Edições 1 e 2 completos) para todos os anos investigados. Essas ausências pontuais são justificadas por três condicionantes do mundo real:
 
-* **Janela Pré-Pandemia (Lacunas de Ingestão):** Em edições mais antigas (como 2007.2, 2008.1, 2009.1, 2011.2 e 2015.1), a análise foi estruturada em caráter de arquivos órfãos devido à completa indisponibilidade de documentos oficiais digitalizados nos servidores públicos e na internet.
+* **Janela Pré-Pandemia (Lacunas de Ingestão):** Em edições mais antigas (como 2007.2, 2008.1, 2009.1 e 2011.2), a análise foi estruturada em caráter de arquivos órfãos devido à completa indisponibilidade de documentos oficiais digitalizados nos servidores públicos e na internet.
 * **Período da Pandemia (Hiato Institucional):** As quebras de linearidade observadas entre os anos de 2020 e 2022 refletem o impacto direto da pandemia de COVID-19. Durante este intervalo, a instituição alterou os critérios tradicionais de admissão, suspendendo exames em prol da análise de histórico escolar, o que eliminou a existência de gabaritos padrão no período.
 * **Fronteira Temporal (Janela de Forecasting):** A ausência de dados referentes ao semestre **2026.2** ocorre estritamente por motivos cronológicos, dado que este processo seletivo ainda não foi realizado até o momento da publicação e consolidação desta documentação.
 
@@ -182,7 +182,7 @@ Abaixo estão isolados os achados estocásticos mais críticos extraídos das si
 Transformando *Data Analysis* em *Actionable Insights*:
 
 1. **A Nova Fronteira de Segurança (Polos A e E):** No cenário atual (60Q), as alternativas A (13) e E (14) concentram 45% do gabarito. Compõem o portfólio de chute estatístico com o maior Índice de Sharpe (Retorno sobre Risco).
-2. **Restrição de Miolo (Limites B, C, D):** O algoritmo fixa um teto rígido em 11 ocorrências para o centro. Marcações excessivas (ex: 13+ opções na letra C) são um Sinal de Alerta de captura por distratores linguísticos.
+2. **Restrição de Miolo (Limites B, C, D):** O algoritmo fixa um teto rígido em 11 ocorrências para o centro. Marcações excessivas (ex: 13+ opções na letra C) são um Sinal de Alerta de categoria por distratores linguísticos.
 
 ---
 
