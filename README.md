@@ -23,16 +23,17 @@
 ## 📑 Índice
 1. [Resumo Executivo e Problema de Negócio](#1-resumo-executivo-e-problema-de-negócio)
 2. [Arquitetura de Dados e Pipeline ETL](#2-arquitetura-de-dados-e-pipeline-etl)
+   * [2.1. Consistência da Série Temporal e Limitações do Dataset](#21-consistência-da-série-temporal-e-limitações-do-dataset)
 3. [Modelagem Estatística e Framework Matemático](#3-modelagem-estatística-e-framework-matemático)
 4. [O Gênesis do Algoritmo: Cohort Legacy (48Q)](#4-o-gênesis-do-algoritmo-cohort-legacy-48q)
 5. [Dashboard Analítico: Cohort Standard (54Q)](#5-dashboard-analítico-cohort-standard-54q)
 6. [O Impacto da Transição: Cohort Expansion (60Q)](#6-o-impacto-da-transição-cohort-expansion-60q)
 7. [A Linha do Tempo da Assimetria Controlada](#7-a-linha-do-tempo-da-assimetria-controlada)
-8. [🧠 7.1. Resultados Chave & Key Insights (Maturidade Analítica)](#71-resultados-chave--key-insights-maturidade-analítica)
-9. [🔮 8. Forecasting e Otimização de Risco](#-8-forecasting-e-otimização-de-risco)
-10. [📂 9. Estrutura do Projeto e Reprodutibilidade](#-9-estrutura-do-projeto-e-reprodutibilidade)
-11. [🎯 10. Roadmap e Próximos Passos](#-10-roadmap-e-próximos-passos)
-12. [🤝 11. Como Contribuir (Open-Source Framework)](#-11-como-contribuir-open-source-framework)
+   * [7.1. Resultados Chave & Key Insights (Maturidade Analítica)](#71-resultados-chave--key-insights-maturidade-analítica)
+8. [Forecasting e Otimização de Risco](#8-forecasting-e-otimização-de-risco)
+9. [Estrutura do Projeto e Reprodutibilidade](#9-estrutura-do-projeto-e-reprodutibilidade)
+10. [Roadmap e Próximos Passos](#10-roadmap-e-próximos-passos)
+11. [Como Contribuir (Open-Source Framework)](#11-como-contribuir-open-source-framework)
 
 ---
 
@@ -50,6 +51,14 @@ Para garantir a confiabilidade matemática da análise, os dados brutos passaram
 * **Data Cleansing & Wrangling:** Normalização de dados não-estruturados em um esquema relacional (Tidy Data). O Dicionário de Dados consolidado encontra-se na pasta `/data`.
 * **Feature Engineering:** Criação da dimensão categórica `Cohort` para segmentar os dados e evitar poluição estatística entre diferentes matrizes curriculares.
 * **Integrity Checks:** Validação estrita garantindo que a soma das frequências absolutas seja perfeitamente igual ao Total de Questões do período investigado.
+
+### ⚠️ 2.1. Consistência da Série Temporal e Limitações do Dataset
+
+Para garantir a transparência metodológica e a auditabilidade deste projeto, é importante destacar que a série histórica não possui gabaritos binários (Edições 1 e 2 completos) para todos os anos investigados. Essas ausências pontuais são justificadas por três condicionantes do mundo real:
+
+* **Janela Pré-Pandemia (Lacunas de Ingestão):** Em edições mais antigas (como 2007.2, 2008.1, 2009.1, 2011.2 e 2015.1), a análise foi estruturada em caráter de arquivos órfãos devido à completa indisponibilidade de documentos oficiais digitalizados nos servidores públicos e na internet.
+* **Período da Pandemia (Hiato Institucional):** As quebras de linearidade observadas entre os anos de 2020 e 2022 refletem o impacto direto da pandemia de COVID-19. Durante este intervalo, a instituição alterou os critérios tradicionais de admissão, suspendendo exames em prol da análise de histórico escolar, o que eliminou a existência de gabaritos padrão no período.
+* **Fronteira Temporal (Janela de Forecasting):** A ausência de dados referentes ao semestre **2026.2** ocorre estritamente por motivos cronológicos, dado que este processo seletivo ainda não foi realizado até o momento da publicação e consolidação desta documentação.
 
 ---
 
@@ -113,7 +122,7 @@ A Análise Exploratória de Dados (EDA) permitiu classificar o perfil de risco:
 | **E** | 9 | 9 | 14 | **9** |
 | **Total** | **54** | **54** | **54** | **54** |
 
-* **Critério do Target:** Representa o *Steady State* (Estado Estacionário). A Letra C atua as restrições rígidas em 10. As variáveis de ataque (B e D) operam em equilíbrio na fronteira máxima (12), forçando a Letra E a atuar como folga sistêmica na base inferior (9).
+* **Critério do Target:** Representa o *Steady State* (Estado Estacionário). A Letra C atua como restrição rígida em 10. As variáveis de ataque (B e D) operam em equilíbrio na fronteira máxima (12), forçando a Letra E a atuar como folga sistêmica na base inferior (9).
 
 ---
 
@@ -156,7 +165,7 @@ O comportamento algorítmico da banca examinadora não foi estático ao longo da
 Abaixo estão isolados os achados estocásticos mais críticos extraídos das simulações estatísticas do projeto, servindo como bússola preditiva para tomadas de decisão sob condições de incerteza:
 
 > 🎯 **Estabilidade Estocástica da Letra C (A Âncora do Sistema)**
-> A alternative **C** funcionou como o centro de gravidade absoluto durante a Cohort Standard (54Q). Com o menor desvio padrão global registrado na série temporal, ela manteve-se cravada na marca de exatamente **10 respostas corretas** em mais de 85% das edições analisadas. Isso prova que a Letra C não segue um *Random Walk* (passeio aleatório), mas sim uma restrição rígida de código do formulador.
+> A alternativa **C** funcionou como o centro de gravidade absoluto durante a Cohort Standard (54Q). Com o menor desvio padrão global registrado na série temporal, ela manteve-se cravada na marca de exatamente **10 respostas corretas** em mais de 85% das edições analisadas. Isso prova que a Letra C não segue um *Random Walk* (passeio aleatório), mas sim uma restrição rígida de código do formulador.
 
 > ⚠️ **O Crash Point Bimodal da Letra B (O Mecanismo Honeypot)**
 > A alternativa **B** apresentou um comportamento bimodal perigoso. Embora sustente médias aceitáveis a longo prazo, ela sofreu um travamento de circuito (*circuit breaker*) punitivo nas safras recentes, despencando para apenas **5 ocorrências**. Esse comportamento indica que a Letra B atua como uma armadilha de saturação (Honeypot) para capturar candidatos que abusam de padrões ingênuos de preenchimento.
