@@ -32,8 +32,7 @@
    * [7.1. Resultados Chave & Key Insights (Maturidade Analítica)](#71-resultados-chave--key-insights-maturidade-analítica)
 8. [Forecasting e Otimização de Risco](#8-forecasting-e-otimização-de-risco)
 9. [Estrutura do Projeto e Reprodutibilidade](#9-estrutura-do-projeto-e-reprodutibilidade)
-10. [Roadmap e Próximos Passos](#10-roadmap-e-próximos-passos)
-11. [Como Contribuir (Open-Source Framework)](#11-como-contribuir-open-source-framework)
+10. [Como Contribuir (Open-Source Framework)](#10-como-contribuir-open-source-framework)
 
 ---
 
@@ -207,3 +206,20 @@ FATEC/
 │   └── visualization/      # Scripts modulares focados na geração via Seaborn/Matplotlib
 ├── LICENSE                 # Licença MIT (Open-Source)
 └── README.md               # Documentação técnica principal
+
+## 🤝 10. Como Contribuir (Open-Source Framework)
+
+Contribuições que elevem o nível de acurácia preditiva do ecossistema são muito bem-vistas. Para reportar bugs, sugerir refatorações de código ou adicionar novos dados das cohorts vigentes (ex: safras 2026/2027), siga o fluxo Git corporativo:
+
+1. Faça um **Fork** deste repositório.
+2. Clone o seu fork localmente e execute os comandos abaixo:
+
+```bash
+# Crie uma branch para a sua feature
+git checkout -b feature/nova-analise
+
+# Faça o commit das suas alterações (Commits Semânticos)
+git commit -m "feat: adicionar metadados safra 2026.2"
+
+# Envie para a branch principal
+git push origin feature/nova-analise
